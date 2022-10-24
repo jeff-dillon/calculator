@@ -8,20 +8,29 @@
 
 const add = function(a, b) {
     if(isNaN(a) || isNaN(b)) {
-        return Error('arguments must be numbers');
+        throw new Error('Arguments must be numbers.');
     }
     return a + b;
 };
 
 const subtract = function(a, b) {
+    if(isNaN(a) || isNaN(b)) {
+        throw new Error('Arguments must be numbers.');
+    }
     return a - b;
 };
 
 const multiply = function(a,b) {
+    if(isNaN(a) || isNaN(b)) {
+        throw new Error('Arguments must be numbers.');
+    }
     return a * b;
 };
 
 const divide = function(a, b) {
+    if(isNaN(a) || isNaN(b)) {
+        throw new Error('Arguments must be numbers.');
+    }
     return a / b;
 };
 
