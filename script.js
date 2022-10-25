@@ -35,7 +35,6 @@ const divide = function(a, b) {
 };
 
 function highlight(e){
-    console.log(e);
     e.target.classList.add('pressed');
 }
 
@@ -44,10 +43,23 @@ function removeHighlight(e) {
     e.target.classList.remove('pressed');
 }
 
+function handleKeyPress(e) {
+    let selectedKey = e.keyCode;
+    if(e.shiftKey) {
+        selectedKey = "shift-" + e.keyCode;
+    }
+    const key = document.querySelector(`button[data-key="${selectedKey}"`);
+    if(!key) return;
+    key.classList.add('pressed');
+
+}
+
 const buttons = Array.from(document.querySelectorAll('.button'));
 buttons.forEach(button => {
     button.addEventListener('click', highlight);
     button.addEventListener('transitionend', removeHighlight);
 });
+
+window.addEventListener('keydown', handleKeyPress);
 
 module.exports = {add, subtract, multiply, divide};
