@@ -3,6 +3,77 @@ html, body, .viewport {
     height: 100%;
     margin: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: azure;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #666;
+    max-width: max-content;
+    padding: 20px 10px 10px 10px;
+    border-radius: 20px;
+}
+
+.screen {
+    width: 372px;
+    height: 50px;
+    font-size: 48px;
+    text-align: right;
+    padding: 20px;
+    background-color: #eeeeee;
+    border-radius: 20px;
+}
+
+.button-containers {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.number-container {
+    width: 312px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.operator-container {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    transition: all .07s ease;
+    border-radius: 8px;
+    border: 0 solid black;
+    margin: 2px;
+}
+
+.double {
+    width: 204px;
+}
+
+.equal {
+    background-color: darkgray;
+}
+
+.operator {
+    background-color: lightgray;
+}
+
+.pressed {
+    background-color: #666;
+}

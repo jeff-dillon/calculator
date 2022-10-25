@@ -1,6 +1,3 @@
-// const { default: test } = require('node:test');
-// const { isErrored } = require('stream');
-// const { describe } = require('yargs');
 const { add, subtract, multiply, divide } = require('./script.js');
 
 describe('add()', function() {
