@@ -21,7 +21,7 @@ html, body, .viewport {
 }
 
 .screen {
-    width: 372px;
+    width: 365px;
     height: 50px;
     font-size: 48px;
     text-align: right;
@@ -30,27 +30,15 @@ html, body, .viewport {
     border-radius: 20px;
 }
 
-.button-containers {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
-
-.number-container {
-    width: 312px;
+.button-container {
+    width: 400px;
     display: flex;
     flex-wrap: wrap;
-    
-}
-
-.operator-container {
-    width: 100px;
-    display: flex;
-    flex-direction: column;
+    padding: 8px;
 }
 
 button {
-    width: 100px;
+    width: 96px;
     height: 50px;
     display: flex;
     justify-content: center;
@@ -63,7 +51,7 @@ button {
 }
 
 .double {
-    width: 204px;
+    width: 196px;
 }
 
 .equal {
