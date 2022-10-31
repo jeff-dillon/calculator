@@ -168,6 +168,18 @@ function clearScreen() {
     equation.textContent = '';
 }
 
+function toggleDisableDecimal() {
+    const decimal = document.querySelector('button[data-key="190"');
+    console.log(decimal);
+    if(decimal.disabled) {
+        decimal.disabed = false;
+        decimal.removeAttribute('disabled');
+        console.log('here');
+    } else {
+        decimal.disabled = true;
+    }
+}
+
 /**
  * Event handler. Handle a button click event.
  * @param {Event} e 
@@ -283,7 +295,7 @@ const calc = {
     },
 
     evaluateNumber: function(num) {
-        if(this.currentNumber == 'first' && this.isDecimal) {
+        if(this.currentNumber == 'first' && this.isDecimal && Number.isInteger(this.firstNumber)) {
             this.firstNumber = Number(`${this.firstNumber.toString()}\.${num}`);
             this.toggleDecimal();
         } else if(this.currentNumber == 'first' && !this.isDecimal) {
@@ -330,12 +342,14 @@ function calculatorController(selectedButton) {
         addHighlight(selectedButton);
     } else if(buttonText == '=') { 
         calc.evaluateExpression();
+        toggleDisableDecimal();
         updateScreen(calc.getCurrentNumber());
         updateEquation(calc.calculationString);
         addHighlight(selectedButton);
         removeHighlightOperator();
     } else if(buttonText == '.') {
         calc.toggleDecimal();
+        toggleDisableDecimal();
         addHighlight(selectedButton);
         updateScreen(calc.getCurrentNumber());
     }else if(numbers.includes(buttonText)) { 
@@ -343,6 +357,7 @@ function calculatorController(selectedButton) {
         updateScreen(calc.getCurrentNumber());
         addHighlight(selectedButton);
     } else if(operators.includes(buttonText)) { 
+        toggleDisableDecimal();
         if(calc.operator == '') {
             addHighlightOperator(selectedButton);
             calc.evaluateOperator(selectedButton.dataset.operator);
