@@ -163,7 +163,7 @@ function updateEquation(newEquation) {
  */
 function clearScreen() {
     const screen = document.querySelector('.screen');
-    screen.textContent = "0";
+    screen.textContent = '0';
     const equation = document.querySelector('.equation');
     equation.textContent = '';
 }
@@ -195,7 +195,7 @@ function handleKeyPress(e) {
     let selectedKeyCode = e.keyCode;
 
     if(e.shiftKey) {
-        selectedKeyCode = "shift-" + e.keyCode;
+        selectedKeyCode = `shift-${e.keyCode}`;
     }
     const selectedButton = document.querySelector(`button[data-key="${selectedKeyCode}"`);
     if(!selectedButton) return;
@@ -218,27 +218,28 @@ function handleKeyPress(e) {
 const calc = {
     firstNumber: 0,
     secondNumber: 0,
-    selectedOperator: '',
+    calculationResult: 0,
+    operator: '',
+    calculationString: '',
     currentNumber: 'first',
     isDecimal: false,
-    calculationResult: 0,
-    calculationString: '',
 
     reset: function () {
         this.firstNumber = 0;
         this.secondNumber = 0;
-        this.selectedOperator = "";
-        this.currentNumber = 'first';
-        this.isDecimal = false;
         this.calculationResult = 0;
+        this.operator = '';
+        this.currentNumber = 'first';
+        this.calculationString = ''
+        this.isDecimal = false;
     },
 
     evaluateExpression: function () {
-        this.calculationResult = operate(this.selectedOperator, this.firstNumber, this.secondNumber);
+        this.calculationResult = operate(this.operator, this.firstNumber, this.secondNumber);
         this.calculationString = this.toString();
         this.firstNumber = this.calculationResult;
         this.currentNumber = 'first';
-        this.selectedOperator = "";
+        this.operator = '';
         this.secondNumber = 0;
     },
 
@@ -275,20 +276,20 @@ const calc = {
     },
 
     evaluateOperator: function(o) {
-        if(this.selectedOperator == "") {
+        if(this.operator == '') {
             this.currentNumber = 'second';
-            this.selectedOperator = o;
+            this.operator = o;
         }
     },
 
     evaluateNumber: function(num) {
         if(this.currentNumber == 'first' && this.isDecimal) {
-            this.firstNumber = Number(this.firstNumber.toString() + "." + num);
+            this.firstNumber = Number(`${this.firstNumber.toString()}\.${num}`);
             this.toggleDecimal();
         } else if(this.currentNumber == 'first' && !this.isDecimal) {
             this.firstNumber = Number(this.firstNumber.toString() + num);
         } else if(this.currentNumber == 'second' && this.isDecimal) {
-            this.secondNumber = Number(this.secondNumber.toString() + "." + num);
+            this.secondNumber = Number(`${this.secondNumber.toString()}\.${num}`);
             this.toggleDecimal();
         } else {
             this.secondNumber = Number(this.secondNumber.toString() + num);
@@ -296,10 +297,10 @@ const calc = {
     },
 
     toString: function() {
-        if(this.selectedOperator == "") {
-            return "";
+        if(this.operator == '') {
+            return '';
         } else {
-            return `${this.firstNumber}  ${this.selectedOperator} ${this.secondNumber} = ${this.calculationResult}`;
+            return `${this.firstNumber}  ${this.operator} ${this.secondNumber} = ${this.calculationResult}`;
         }
     }
 };
@@ -314,7 +315,7 @@ const calc = {
 function calculatorController(selectedButton) {
     
     const numbers = ['1','2','3','4','5','6','7','8','9','0'];
-    const operators = ["+","−","×","÷"];
+    const operators = ['+','−','×','÷'];
 
     buttonText = selectedButton.textContent;
 
@@ -327,13 +328,13 @@ function calculatorController(selectedButton) {
         calc.changeSign();
         updateScreen(calc.getCurrentNumber());
         addHighlight(selectedButton);
-    } else if(buttonText == "=") { 
+    } else if(buttonText == '=') { 
         calc.evaluateExpression();
         updateScreen(calc.getCurrentNumber());
         updateEquation(calc.calculationString);
         addHighlight(selectedButton);
         removeHighlightOperator();
-    } else if(buttonText == ".") {
+    } else if(buttonText == '.') {
         calc.toggleDecimal();
         addHighlight(selectedButton);
         updateScreen(calc.getCurrentNumber());
@@ -342,7 +343,7 @@ function calculatorController(selectedButton) {
         updateScreen(calc.getCurrentNumber());
         addHighlight(selectedButton);
     } else if(operators.includes(buttonText)) { 
-        if(calc.selectedOperator == "") {
+        if(calc.operator == '') {
             addHighlightOperator(selectedButton);
             calc.evaluateOperator(selectedButton.dataset.operator);
         }
