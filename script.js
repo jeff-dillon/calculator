@@ -175,14 +175,15 @@ function clearScreen() {
 /**
  * Turn the decimal button on/off to prevent mulitple decimals.
  */
-function toggleDisableDecimal() {
+function disableDecimal() {
+    const decimal = document.querySelector('button[data-key="190"');        
+    decimal.disabled = true;
+}
+
+function enableDecimal() {
     const decimal = document.querySelector('button[data-key="190"');
-    if(decimal.disabled) {
-        decimal.disabed = false;
-        decimal.removeAttribute('disabled');
-    } else {
-        decimal.disabled = true;
-    }
+    decimal.disabed = false;
+    decimal.removeAttribute('disabled');
 }
 
 /**
@@ -339,6 +340,7 @@ function calculatorController(selectedButton) {
     if(buttonText == 'AC') {
         calc.reset();
         clearScreen();
+        enableDecimal();
         addHighlight(selectedButton);
         removeHighlightOperator(selectedButton);
     } else if(buttonText == '+/-') { 
@@ -347,14 +349,14 @@ function calculatorController(selectedButton) {
         addHighlight(selectedButton);
     } else if(buttonText == '=') { 
         calc.evaluateExpression();
-        toggleDisableDecimal();
+        enableDecimal();
         updateScreen(calc.getCurrentNumber());
         updateEquation(calc.calculationString);
         addHighlight(selectedButton);
         removeHighlightOperator();
     } else if(buttonText == '.') {
         calc.toggleDecimal();
-        toggleDisableDecimal();
+        disableDecimal();
         addHighlight(selectedButton);
         updateScreen(calc.getCurrentNumber());
     }else if(numbers.includes(buttonText)) { 
@@ -362,7 +364,7 @@ function calculatorController(selectedButton) {
         updateScreen(calc.getCurrentNumber());
         addHighlight(selectedButton);
     } else if(operators.includes(buttonText)) { 
-        toggleDisableDecimal();
+        enableDecimal();
         if(calc.operator == '') {
             addHighlightOperator(selectedButton);
             calc.evaluateOperator(selectedButton.dataset.operator);
