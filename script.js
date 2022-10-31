@@ -299,7 +299,7 @@ const calc = {
         if(this.selectedOperator == "") {
             return "";
         } else {
-            return this.firstNumber + " " + this.selectedOperator + " " + this.secondNumber + " = " + this.calculationResult;
+            return `${this.firstNumber}  ${this.selectedOperator} ${this.secondNumber} = ${this.calculationResult}`;
         }
     }
 };
