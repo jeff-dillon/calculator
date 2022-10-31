@@ -25,16 +25,29 @@ html, body, .viewport {
     height: 50px;
     font-size: 48px;
     text-align: right;
-    padding: 20px;
+    padding: 5px 20px 5px 20px;
     background-color: #eeeeee;
     border-radius: 20px;
+    margin: 2px;
+    justify-content: center;
+}
+
+.equation {
+    width: 365px;
+    height: 22px;
+    font-size: 20px;
+    text-align: right;
+    padding: 5px 20px 5px 20px;
+    background-color: #eeeeee;
+    border-radius: 8px;
+    margin: 2px;
 }
 
 .button-container {
     width: 400px;
     display: flex;
     flex-wrap: wrap;
-    padding: 8px;
+   /* padding: 8px; */
 }
 
 button {
@@ -64,4 +77,8 @@ button {
 
 .pressed {
     background-color: #666;
+}
+
+.pressed-operator {
+    background-color: coral;
 }
