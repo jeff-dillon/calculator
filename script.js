@@ -170,11 +170,9 @@ function clearScreen() {
 
 function toggleDisableDecimal() {
     const decimal = document.querySelector('button[data-key="190"');
-    console.log(decimal);
     if(decimal.disabled) {
         decimal.disabed = false;
         decimal.removeAttribute('disabled');
-        console.log('here');
     } else {
         decimal.disabled = true;
     }
