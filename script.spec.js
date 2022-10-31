@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide } = require('./script.js');
+const { add, subtract, multiply, divide, operate } = require('./script.js');
 
 describe('add()', function() {
     test('adds 1 + 2 to equal 3', function(){
@@ -57,5 +57,20 @@ describe('divide()', function(){
     });
     test('divides b / 7 to return an error', function() {
         expect( () =>divide('b',7)).toThrow('Arguments must be numbers.');
+    });
+});
+
+describe('operate()', function(){
+    test('divides 10 / 2 to equal 5', function(){
+        expect(operate('/', 10, 2)).toEqual(5);
+    });
+    test('adds 1 + 3 to equal 4', function(){
+        expect(operate('+', 1, 3)).toEqual(4);
+    });
+    test('multiplies 2 * 3 to equal 6', function() {
+        expect(operate('*', 2 ,3)).toEqual(6);
+    });
+    test('subtracts 10 - 3 to equal 7', function() {
+        expect(operate('-', 10, 3)).toEqual(7);
     });
 });

@@ -19,7 +19,7 @@
  * @param {Number} b - Second number.
  * @returns Result of addition.
  */
-const add = function(a, b) {
+ const add = function(a, b) {
     if(isNaN(a) || isNaN(b)) {
         throw new Error('Arguments must be numbers.');
     }
@@ -63,6 +63,26 @@ const divide = function(a, b) {
         throw new Error('Arguments must be numbers.');
     }
     return a / b;
+};
+
+const operate = function(operator, a, b) {
+    let returnValue = 0;
+    switch(operator) {
+        case '+':
+            returnValue = add(a, b);
+            break;
+        case '-':
+            returnValue = subtract(a, b);
+            break;
+        case '*':
+            returnValue = multiply(a, b);
+            break;
+        case '/':
+            returnValue = divide(a, b);
+            break;
+    }
+    return returnValue;
+
 };
 
 
@@ -159,14 +179,31 @@ function clearScreen() {
     screen.textContent = "";
 }
 
-const buttons = Array.from(document.querySelectorAll('.button'));
-buttons.forEach(button => {
-    button.addEventListener('click', handleClick);
-    button.addEventListener('transitionend', handleTransition);
-});
+try {
+    const buttons = Array.from(document.querySelectorAll('.button'));
+    buttons.forEach(button => {
+        button.addEventListener('click', handleClick);
+        button.addEventListener('transitionend', handleTransition);
+    });
+    
+    window.addEventListener('keydown', handleKeyPress);
+    
+    updateScreen(displayText);
 
-window.addEventListener('keydown', handleKeyPress);
+} catch(err) {
+    if(err.name != 'ReferenceError') {
+        throw new Error(err);
+    }
+}
 
-updateScreen(displayText);
 
-module.exports = {add, subtract, multiply, divide};
+// Module exports used for jest testing, throws ReferenceError when run in browser.
+try {
+    module.exports = {add, subtract, multiply, divide, operate};
+} catch(err) {
+    if(err.name != 'ReferenceError') {
+        throw new Error(err);
+    }
+}
+
+

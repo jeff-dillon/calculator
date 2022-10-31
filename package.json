@@ -1,4 +1,5 @@
 {
+    "testEnvironment": "jsdom",
     "scripts": {
         "test": "jest"
     },
