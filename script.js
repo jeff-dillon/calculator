@@ -71,9 +71,9 @@ const divide = function(dividend, divisor) {
 
 /**
  * Wrapper function for add, subtract, multiply, and divide.
- * @param {*} operator 
- * @param {*} number1 
- * @param {*} number2 
+ * @param {String} operator 
+ * @param {Number} number1 
+ * @param {Number} number2 
  * @returns Result of the operation rounded to max 4 decimals if the result is not an integer.
  */
 const operate = function(operator, number1, number2) {
@@ -153,6 +153,10 @@ function removeHighlightOperator() {
     screen.textContent = newNumber;
 }
 
+/**
+ * Display the full equation.
+ * @param {String} newEquation 
+ */
 function updateEquation(newEquation) {
     const equation = document.querySelector('.equation');
     equation.textContent = newEquation;
@@ -168,6 +172,9 @@ function clearScreen() {
     equation.textContent = '';
 }
 
+/**
+ * Turn the decimal button on/off to prevent mulitple decimals.
+ */
 function toggleDisableDecimal() {
     const decimal = document.querySelector('button[data-key="190"');
     if(decimal.disabled) {
