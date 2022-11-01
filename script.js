@@ -257,6 +257,9 @@ const calc = {
         if(this.calculationResult > 100000000 || this.calculationResult < -100000000) {
             this.calculationResult = this.calculationResult.toExponential();
         }
+        if(!Number.isInteger(this.calculationResult)) {
+            this.isDecimal = true;
+        }
         this.calculationString = this.toString();
         this.firstNumber = this.calculationResult;
         this.currentNumber = 'first';
@@ -365,6 +368,9 @@ function calculatorController(selectedButton) {
         updateEquation(calc.calculationString);
         addHighlight(selectedButton);
         removeHighlightOperator();
+        if(calc.isDecimal) {
+            disableDecimal();
+        }
     } else if(buttonText == '%') {
         calc.percent();
         updateScreen(calc.getCurrentNumber());
@@ -378,6 +384,7 @@ function calculatorController(selectedButton) {
         updateScreen(calc.getCurrentNumber());
         addHighlight(selectedButton);
     } else if(operators.includes(buttonText)) { 
+        calc.isDecimal = false;
         enableDecimal();
         if(calc.operator == '') {
             addHighlightOperator(selectedButton);
