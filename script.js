@@ -300,6 +300,14 @@ const calc = {
         }
     },
 
+    percent: function () {
+        if(this.currentNumber == 'first') {
+            this.firstNumber = this.firstNumber / 100;
+        } else {
+            this.secondNumber = this.secondNumber / 100;
+        }
+    },
+
     evaluateNumber: function(num) {
         if(this.currentNumber == 'first' && this.isDecimal && Number.isInteger(this.firstNumber)) {
             this.firstNumber = Number(`${this.firstNumber.toString()}\.${num}`);
@@ -354,6 +362,9 @@ function calculatorController(selectedButton) {
         updateEquation(calc.calculationString);
         addHighlight(selectedButton);
         removeHighlightOperator();
+    } else if(buttonText == '%') {
+        calc.percent();
+        updateScreen(calc.getCurrentNumber());
     } else if(buttonText == '.') {
         calc.toggleDecimal();
         disableDecimal();

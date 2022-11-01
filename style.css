@@ -21,19 +21,19 @@ html, body, .viewport {
 }
 
 .screen {
-    width: 365px;
+    width: 356px;
     height: 50px;
     font-size: 48px;
     text-align: right;
     padding: 5px 20px 5px 20px;
     background-color: #eeeeee;
-    border-radius: 20px;
+    border-radius: 8px;
     margin: 2px;
     justify-content: center;
 }
 
 .equation {
-    width: 365px;
+    width: 356px;
     height: 22px;
     font-size: 20px;
     text-align: right;
