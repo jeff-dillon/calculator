@@ -258,7 +258,7 @@ const calc = {
             this.calculationResult = this.calculationResult.toExponential();
         }
         if(!Number.isInteger(this.calculationResult)) {
-            this.isDecimal = true;
+            this.isDecimal = false;
         }
         this.calculationString = this.toString();
         this.firstNumber = this.calculationResult;
