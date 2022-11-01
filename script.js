@@ -254,6 +254,9 @@ const calc = {
 
     evaluateExpression: function () {
         this.calculationResult = operate(this.operator, this.firstNumber, this.secondNumber);
+        if(this.calculationResult > 100000000) {
+            this.calculationResult = this.calculationResult.toExponential();
+        }
         this.calculationString = this.toString();
         this.firstNumber = this.calculationResult;
         this.currentNumber = 'first';
@@ -309,15 +312,15 @@ const calc = {
     },
 
     evaluateNumber: function(num) {
-        if(this.currentNumber == 'first' && this.isDecimal && Number.isInteger(this.firstNumber)) {
+        if(this.currentNumber == 'first' && this.isDecimal && this.firstNumber.toString().length < 10) {
             this.firstNumber = Number(`${this.firstNumber.toString()}\.${num}`);
             this.toggleDecimal();
-        } else if(this.currentNumber == 'first' && !this.isDecimal) {
+        } else if(this.currentNumber == 'first' && !this.isDecimal && this.firstNumber.toString().length < 10) {
             this.firstNumber = Number(this.firstNumber.toString() + num);
-        } else if(this.currentNumber == 'second' && this.isDecimal) {
+        } else if(this.currentNumber == 'second' && this.isDecimal && this.secondNumber.toString().length < 10) {
             this.secondNumber = Number(`${this.secondNumber.toString()}\.${num}`);
             this.toggleDecimal();
-        } else {
+        } else if(this.currentNumber == 'second' && !this.isDecimal && this.secondNumber.toString().length < 10) {
             this.secondNumber = Number(this.secondNumber.toString() + num);
         }
     },
