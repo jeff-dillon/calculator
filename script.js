@@ -254,7 +254,7 @@ const calc = {
 
     evaluateExpression: function () {
         this.calculationResult = operate(this.operator, this.firstNumber, this.secondNumber);
-        if(this.calculationResult > 100000000) {
+        if(this.calculationResult > 100000000 || this.calculationResult < -100000000) {
             this.calculationResult = this.calculationResult.toExponential();
         }
         this.calculationString = this.toString();

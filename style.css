@@ -34,8 +34,8 @@ html, body, .viewport {
 
 .equation {
     width: 356px;
-    height: 22px;
-    font-size: 20px;
+    height: 24px;
+    font-size: 14px;
     text-align: right;
     padding: 5px 20px 5px 20px;
     background-color: #eeeeee;
